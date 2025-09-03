@@ -1,0 +1,55 @@
+{
+	"name": "@extrusionsim/client",
+	"version": "1.0.1",
+	"description": "Official TypeScript/JavaScript client library for EIS Simulation API",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist",
+		"README.md",
+		"LICENSE"
+	],
+	"engines": {
+		"node": ">=16.0.0"
+	},
+	"scripts": {
+		"build": "tsc",
+		"dev": "tsc --watch",
+		"clean": "rm -rf dist",
+		"prepublish": "npm run clean && npm run build",
+		"test": "node test/test.js",
+		"typecheck": "tsc --noEmit",
+		"lint": "eslint src --ext .ts",
+		"format": "prettier --write src/**/*.ts"
+	},
+	"keywords": [
+		"eis",
+		"simulation",
+		"api",
+		"client",
+		"typescript",
+		"extrusion",
+		"aluminum",
+		"manufacturing"
+	],
+	"author": "EIS Team",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/extrusionsim/client.git"
+	},
+	"bugs": {
+		"url": "https://github.com/extrusionsim/client/issues"
+	},
+	"homepage": "https://docs.extrusionsim.com",
+	"devDependencies": {
+		"@types/node": "^24.3.0",
+		"@typescript-eslint/eslint-plugin": "^8.42.0",
+		"@typescript-eslint/parser": "^8.42.0",
+		"eslint": "^9.34.0",
+		"prettier": "^3.6.2",
+		"typescript": "^5.9.2"
+	},
+	"peerDependencies": {},
+	"dependencies": {}
+}
