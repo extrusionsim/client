@@ -155,7 +155,17 @@ export class EisClient {
 
       // Handle API-level errors (success: false)
       if (!result.success) {
-        throw new EisApiError(result.error || 'Unknown API error', {
+        const errorMessage = result.error || 'Unknown API error';
+
+        // Ensure validation errors are thrown as EisApiError
+        if (errorMessage.startsWith('Validation error')) {
+          throw new EisApiError(errorMessage, {
+            code: 'VALIDATION_ERROR',
+            statusCode: response.status,
+          });
+        }
+
+        throw new EisApiError(errorMessage, {
           statusCode: response.status,
         });
       }

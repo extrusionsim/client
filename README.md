@@ -355,10 +355,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Changelog
 
-### v1.0.0
+### v1.0.3
 
-- Initial release
-- Full TypeScript support
-- Core API methods: `getApiStatus()`, `calculateSimulation()`
-- Error handling with `EisApiError`
-- Framework-agnostic design
+- Validation error handling integrated.
