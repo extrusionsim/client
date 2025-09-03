@@ -193,8 +193,91 @@ export class EisClient {
   /**
    * Calculate simulation based on input parameters
    *
-   * @param inputData - Simulation input parameters
-   * @returns Promise with API response containing simulation results
+   * @param inputData - SimulationInput object containing all required parameters:
+   *     - `recipeOrderVolume: number` - Order volume for the recipe
+   *     - `recipeFinalProductLength: number` - Final product length
+   *     - `recipeStretcherScrap: number` - Stretcher scrap amount
+   *     - `recipeRampUpTime: number` - Ramp up time for the recipe
+   *     - `recipeSurface: 'BRIGHT_ANODIZED' | 'ANODIZED' | 'POWDER_COATED' | 'MILL_FINISH'` - Surface finish type
+   *     - `recipeTemper: 'T4' | 'T5' | 'T6' | 'T66'` - Temper classification
+   *     - `recipeRealWeightPerMeter: number` - Real weight per meter
+   *     - `pressContainerDiameter: number` - Press container diameter
+   *     - `pressBilletDiameter: number` - Press billet diameter
+   *     - `pressMaxShearableLength: number` - Maximum shearable length
+   *     - `pressRunOutTableLength: number` - Run out table length
+   *     - `pressPullerPosition: number` - Puller position
+   *     - `pressMinShearableLength: number` - Minimum shearable length
+   *     - `pressBilletType: 'CUT' | 'SHEARED'` - Billet type
+   *     - `pressTechnology: 'DIRECT' | 'INDIRECT'` - Press technology type
+   *     - `pressForce: number` - Press force
+   *     - `pressMaxRamSpeed: number` - Maximum ram speed
+   *     - `pressMaxPullerSpeed: number` - Maximum puller speed
+   *     - `pressDeadCycleTime: number` - Dead cycle time
+   *     - `pressDieChangeTime: number` - Die change time
+   *     - `pressBoreDiameter: number` - Press bore diameter
+   *     - `pressRodDiameter: number` - Press rod diameter
+   *     - `drawingArea: number` - Drawing area
+   *     - `drawingCircumference: number` - Drawing circumference
+   *     - `drawingThicknessMin: number` - Minimum drawing thickness
+   *     - `drawingInsidePerimeter: number` - Inside perimeter
+   *     - `drawingOutsidePerimeter: number` - Outside perimeter
+   *     - `drawingMandrels: number` - Number of drawing mandrels
+   *     - `drawingDieType: 'FLAT' | 'PORTHOLE'` - Die type
+   *     - `drawingDieComplexity: 'A' | 'B' | 'C' | 'D' | 'E'` - Die complexity
+   *     - `dieCavities: number` - Number of die cavities
+   *     - `alloyType: 'ALMGSI' | 'ALZNMG' | 'ALZNMGCU'` - Alloy type
+   *     - `alloyTensileStrength: number` - Alloy tensile strength
+   *     - `alloyYieldStrength: number` - Alloy yield strength
+   *     - `alloyCoolingRatio: number` - Alloy cooling ratio
+   *     - `pressCostTotalPerHour: number` - Total press cost per hour
+   *     - `dieAlVolume: number` - Die aluminum volume
+   *     - `pressNitridingFactor: number` - Press nitriding factor
+   *     - `pressId: string` - Press identifier
+   *     - `recipeId: string` - Recipe identifier
+   * @returns Promise<ApiResponse<SimulationOutput>> - API response with either:
+   *   - Success: `{ data: SimulationOutput, success: true, error: null }` where SimulationOutput contains:
+   *     - `firstBilletLength: number` - Length of the first billet
+   *     - `normalBilletLength: number` - Length of normal billets
+   *     - `lastBilletLength: number` - Length of the last billet
+   *     - `billetsPerOrder: number` - Number of billets per order
+   *     - `extrusionLength: string` - Total extrusion length
+   *     - `lengthsPerBillet: number` - Number of lengths per billet
+   *     - `startUpRamSpeed: string` - Startup ram speed
+   *     - `normalRamSpeed: string` - Normal operating ram speed
+   *     - `normalProductSpeed: string` - Normal product speed
+   *     - `billetsPerHour: string` - Billets processed per hour
+   *     - `productivityPerHour: number` - Productivity per hour
+   *     - `netProductivityPerHour: number` - Net productivity per hour
+   *     - `scrap: string` - Scrap amount
+   *     - `timeToFinishOrder: number` - Time required to finish order
+   *     - `secondsByBillet: number` - Seconds per billet
+   *     - `firstBilletTemperature: number` - First billet temperature
+   *     - `secondBilletTemperature: number` - Second billet temperature
+   *     - `normalBilletTemperature: number` - Normal billet temperature
+   *     - `containerTemperature: number` - Container temperature
+   *     - `dieTemperatureAtThePress: number` - Die temperature at press
+   *     - `exitTemperaturePressMouth: number` - Exit temperature at press mouth
+   *     - `contactTime: number` - Contact time
+   *     - `extrusionRatio: number` - Extrusion ratio
+   *     - `inefficient: boolean` - Whether the process is inefficient
+   *     - `efficiencyRatio: string` - Efficiency ratio
+   *     - `totalOrderQuantity: string` - Total order quantity
+   *     - `pressCostPerKg: string` - Press cost per kilogram
+   *     - `quantityStretching: number` - Quantity for stretching
+   *     - `stretchingPressureNeeded: number` - Pressure needed for stretching
+   *     - `extrusionLengthAfterStretching: string` - Extrusion length after stretching
+   *     - `nrBilletsToStretch: number` - Number of billets to stretch
+   *     - `weightPerMeter: number` - Weight per meter
+   *     - `dieCavities: number` - Number of die cavities
+   *     - `contactTimeForNormalBillet: number` - Contact time for normal billet
+   *     - `alloyCoolingRatio: string` - Alloy cooling ratio
+   *     - `customerLengthMm: number` - Customer length in millimeters
+   *     - `drawingThicknessMin: string` - Minimum drawing thickness
+   *     - `theoreticalWeightPerMeter: number` - Theoretical weight per meter
+   *     - `scrapAfterWeldingBillets: string` - Scrap after welding billets
+   *     - `totalCoringAndWeldingScrap: string` - Total coring and welding scrap
+   *     - `dieLifeTime: number` - Die lifetime
+   *   - Error: `{ data: null, success: false, error: string }` - Contains error message
    */
   public async calculateSimulation(
     inputData: SimulationInput
@@ -230,7 +313,12 @@ export class EisClient {
   /**
    * Get API status and health information
    *
-   * @returns Promise with API response containing status information
+   * @returns Promise<ApiResponse<ApiStatus>> - API response with either:
+   *   - Success: `{ data: ApiStatus, success: true, error: null }` where ApiStatus contains:
+   *     - `message: string` - Status message from the API
+   *     - `timestamp: string` - Timestamp of the status check
+   *     - `version: string` - API version information
+   *   - Error: `{ data: null, success: false, error: string }` - Contains error message
    */
   public async getApiStatus(): Promise<ApiResponse<ApiStatus>> {
     try {
