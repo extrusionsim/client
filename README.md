@@ -355,6 +355,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Changelog
 
+### v1.0.4
+
+- Quenching calculation integrated.
+- Aging chart integrated.
+
 ### v1.0.3
 
 - Validation error handling integrated.

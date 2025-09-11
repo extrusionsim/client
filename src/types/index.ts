@@ -159,6 +159,80 @@ export interface SimulationOutput {
 }
 
 /**
+ * Input parameters for quenching calculation
+ */
+export interface QuenchingInput {
+	readonly waterCapacityQuenching: number;
+	readonly airQuenchingCapacity: number;
+	readonly airLeadOutRunOutTableCapacity: number;
+	readonly quenchingLength: number;
+	readonly drawingThicknessMin: number;
+	readonly customerLengthMm: number;
+	readonly normalProductSpeed: number;
+	readonly exitTemperaturePressMouth: number;
+	readonly weightPerMeter: number;
+	readonly dieCavities: number;
+	readonly alloyCoolingRatio: number;
+	readonly contactTimeForNormalBillet: number;
+	readonly extrusionRatio: number;
+}
+
+/**
+ * Result of quenching calculation
+ */
+export interface QuenchingOutput {
+	readonly systemCapable: number;
+	readonly waterFlowSetting: number;
+	readonly airFlowSetting: number;
+	readonly waterFlowAvailable: number;
+	readonly pullerThroughQuenching: number;
+	readonly temperatureProfileAfterQuenching: number;
+	readonly  coolingTime: number;
+	readonly heatAluminumGoesOut: number;
+	readonly qAlM: number;
+	readonly qAlSc: number;
+	readonly afterQuenchingCoolingRate: number;
+	readonly tfalQuenching: number;
+	readonly airWaterFlowRatio: number;
+	readonly waterMass: number;
+	readonly waterFlow: number;
+	readonly airFlowEquivalent: number;
+	readonly waterFlowSettingWaterFlowRatio: number;
+	readonly airFlowSettingAirFlowRatio: number;
+	readonly waterRequired: number;
+	readonly airRequired: number;
+	readonly sumAirWaterRatio: number;
+}
+
+
+/**
+ * Result of aging table calculation
+ */
+export interface AgingTableOutput {
+	readonly id: string;
+	readonly alloy: string;
+	readonly enDesignation: string;
+	readonly product: string;
+	readonly temper: string;
+	readonly thickness: string;
+	readonly tensileStrengthMin: string;
+	readonly tensileStrengthMax: string;
+	readonly yieldStrengthMin: string;
+	readonly yieldStrengthMax: string;
+	readonly elongationMin: string;
+	readonly elongationMax: string;
+	readonly eisDescription: string;
+	readonly waitingTime: string;
+	readonly preheatingTime: string;
+	readonly soakingTime160: string;
+	readonly soakingTime175: string;
+	readonly soakingTime185: string;
+	readonly soakingTime195: string;
+	readonly leanAlloys: string;
+}[]
+
+
+/**
  * API status information
  */
 export interface ApiStatus {

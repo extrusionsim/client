@@ -9,6 +9,9 @@ import type {
   EisClientConfig,
   SimulationInput,
   SimulationOutput,
+  QuenchingInput,
+  QuenchingOutput,
+  AgingTableOutput,
   ApiStatus,
   ApiResponse,
   ApiError,
@@ -304,6 +307,60 @@ export class EisClient {
       const data = await this.makeRequest<SimulationOutput>('/simulate', {
         method: 'POST',
         body: JSON.stringify(inputData),
+      });
+
+      return {
+        data,
+        success: true,
+        error: null,
+      } as const;
+    } catch (error) {
+      return {
+        data: null,
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error',
+      } as const;
+    }
+  }
+
+  public async calculateQuenching(
+    inputData: QuenchingInput
+  ): Promise<ApiResponse<QuenchingOutput>> {
+    if (!inputData) {
+      return {
+        data: null,
+        success: false,
+        error: 'inputData is required',
+      } as const;
+    }
+
+    try {
+      const data = await this.makeRequest<QuenchingOutput>('/quenching', {
+        method: 'POST',
+        body: JSON.stringify(inputData),
+      });
+
+      return {
+        data,
+        success: true,
+        error: null,
+      } as const;
+    } catch (error) {
+      return {
+        data: null,
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error',
+      } as const;
+    }
+  }
+
+  public async getAgingTable(
+    
+  ): Promise<ApiResponse<AgingTableOutput>> {
+    
+    try {
+      const data = await this.makeRequest<AgingTableOutput>('/aging-table', {
+        method: 'GET',
       });
 
       return {
