@@ -54,6 +54,26 @@ if (simulationResponse.success) {
 } else {
   console.error('Simulation failed:', simulationResponse.error);
 }
+
+// Calculate quenching
+const quenchingResponse = await eisApi.calculateQuenching({
+  // ... quenching parameters
+});
+
+if (quenchingResponse.success) {
+  console.log('Quenching calculation:', quenchingResponse.data.systemCapable);
+} else {
+  console.error('Quenching failed:', quenchingResponse.error);
+}
+
+// Get aging table
+const agingTableResponse = await eisApi.getAgingTable();
+
+if (agingTableResponse.success) {
+  console.log('Aging table entries:', agingTableResponse.data.length);
+} else {
+  console.error('Failed to get aging table:', agingTableResponse.error);
+}
 ```
 
 ## API Reference
@@ -130,7 +150,6 @@ The `SimulationInput` interface contains all the parameters needed for simulatio
 
 ```typescript
 interface SimulationInput {
-  // Recipe parameters
   recipeOrderVolume: number;
   recipeFinalProductLength: number;
   recipeStretcherScrap: number;
@@ -142,13 +161,11 @@ interface SimulationInput {
     | 'MILL_FINISH';
   recipeTemper: 'T4' | 'T5' | 'T6' | 'T66';
   recipeRealWeightPerMeter: number;
-
-  // Press parameters
   pressContainerDiameter: number;
   pressBilletDiameter: number;
   pressMaxShearableLength: number;
   pressRunOutTableLength: number;
-  // ... and many more (see full type definitions)
+  // ... see full type definitions in docs
 }
 ```
 
@@ -167,6 +184,65 @@ const simulationResult = await eisApi.calculateSimulation({
 
 console.log('Productivity:', simulationResult.productivityPerHour, 'kg/h');
 console.log('Efficiency:', simulationResult.efficiencyRatio + '%');
+```
+
+#### `calculateQuenching(input): Promise<QuenchingOutput>`
+
+Calculates quenching parameters for aluminum extrusion based on input parameters.
+
+**Parameters:**
+
+- `input`: `QuenchingInput` - Quenching calculation parameters
+
+**Returns:** `Promise<QuenchingOutput>`
+
+The `QuenchingInput` interface contains all the parameters needed for quenching calculation:
+
+```typescript
+interface QuenchingInput {
+  // ... see full type definitions in docs
+}
+```
+
+The `QuenchingOutput` interface contains the calculated quenching results:
+
+```typescript
+interface QuenchingOutput {
+  // ... see full type definitions in docs
+}
+```
+
+**Example:**
+
+```typescript
+const quenchingResult = await eisApi.calculateQuenching({
+  // ... parameters
+});
+
+console.log('System Capable:', quenchingResult.systemCapable);
+```
+
+#### `getAgingTable(): Promise<AgingTableOutput>`
+
+Retrieves the aging table data containing alloy specifications and heat treatment parameters.
+
+**Returns:** `Promise<AgingTableOutput>`
+
+The `AgingTableOutput` is an array of `AgingTableEntry` objects:
+
+```typescript
+interface AgingTableEntry {
+  // ... see full type definitions in docs
+}
+
+type AgingTableOutput = AgingTableEntry[];
+```
+
+**Example:**
+
+```typescript
+const agingTableResult = await eisApi.getAgingTable();
+
 ```
 
 #### `getConfig(): Omit<EisClientConfig, 'apiSecret'> & { apiSecret: string }`
@@ -253,26 +329,6 @@ const results = await Promise.all(
 );
 ```
 
-### Error Recovery with Retry
-
-```typescript
-async function simulateWithRetry(input: SimulationInput, maxRetries = 3) {
-  for (let i = 0; i < maxRetries; i++) {
-    try {
-      return await eisApi.calculateSimulation(input);
-    } catch (error) {
-      if (error instanceof v1.EisError && error.statusCode === 429) {
-        // Rate limited, wait before retry
-        await new Promise((resolve) => setTimeout(resolve, 2000 * (i + 1)));
-        continue;
-      }
-      throw error; // Re-throw non-retryable errors
-    }
-  }
-  throw new Error('Max retries exceeded');
-}
-```
-
 ## Framework Integration
 
 ### Express.js
@@ -355,14 +411,18 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Changelog
 
+### v1.0.6
+
+- Updated readme file.
+
 ### v1.0.5
 
 - Fixed aging chart typescript issue.
 
 ### v1.0.4
 
-- Quenching calculation integrated.
-- Aging chart integrated.
+- **Quenching calculation integrated**: Added `calculateQuenching()` method for calculating quenching parameters including water flow, air flow, cooling rates, and system capabilities.
+- **Aging table integrated**: Added `getAgingTable()` method for retrieving comprehensive alloy specifications and heat treatment parameters.
 
 ### v1.0.3
 
