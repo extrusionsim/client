@@ -212,8 +212,9 @@ export class EisClient {
    *     - `recipeStretcherScrap: number` - Stretcher scrap amount
    *     - `recipeRampUpTime: number` - Ramp up time for the recipe
    *     - `recipeSurface: 'BRIGHT_ANODIZED' | 'ANODIZED' | 'POWDER_COATED' | 'MILL_FINISH'` - Surface finish type
-   *     - `recipeTemper: 'T4' | 'T5' | 'T6' | 'T66'` - Temper classification
+   *     - `recipeTemper: 'T4' | 'T5' | 'T6' | 'T66' | 'T65' | 'T64' | 'T54'` - Temper classification
    *     - `recipeRealWeightPerMeter: number` - Real weight per meter
+   *     - `recipeLogLength: number` - Log length
    *     - `pressContainerDiameter: number` - Press container diameter
    *     - `pressBilletDiameter: number` - Press billet diameter
    *     - `pressMaxShearableLength: number` - Maximum shearable length
@@ -290,6 +291,7 @@ export class EisClient {
    *     - `scrapAfterWeldingBillets: string` - Scrap after welding billets
    *     - `totalCoringAndWeldingScrap: string` - Total coring and welding scrap
    *     - `dieLifeTime: number` - Die lifetime
+   *     - `logBilletRestScrap: string` - Log billet rest scrap
    *   - Error: `{ data: null, success: false, error: string }` - Contains error message
    */
   public async calculateSimulation(

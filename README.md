@@ -159,8 +159,9 @@ interface SimulationInput {
     | 'ANODIZED'
     | 'POWDER_COATED'
     | 'MILL_FINISH';
-  recipeTemper: 'T4' | 'T5' | 'T6' | 'T66';
+  recipeTemper: 'T4' | 'T5' | 'T6' | 'T66' | 'T65' | 'T64' | 'T54';
   recipeRealWeightPerMeter: number;
+  recipeLogLength: number;
   pressContainerDiameter: number;
   pressBilletDiameter: number;
   pressMaxShearableLength: number;
@@ -410,6 +411,10 @@ npm run typecheck
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Changelog
+
+### v1.0.7
+
+- Integrated billet scrap.
 
 ### v1.0.6
 

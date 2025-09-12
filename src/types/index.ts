@@ -31,7 +31,7 @@ export type RecipeSurface =
 /**
  * Temper designation for aluminum alloy
  */
-export type RecipeTemper = 'T4' | 'T5' | 'T6' | 'T66';
+export type RecipeTemper = 'T4' | 'T5' | 'T6' | 'T66' | 'T65' | 'T64' | 'T54';
 
 /**
  * Billet type for the extrusion process
@@ -76,6 +76,7 @@ export interface SimulationInput {
   readonly recipeSurface: RecipeSurface;
   readonly recipeTemper: RecipeTemper;
   readonly recipeRealWeightPerMeter: number;
+  readonly recipeLogLength: number;
   readonly pressContainerDiameter: number;
   readonly pressBilletDiameter: number;
   readonly pressMaxShearableLength: number;
@@ -156,6 +157,7 @@ export interface SimulationOutput {
   readonly scrapAfterWeldingBillets: string;
   readonly totalCoringAndWeldingScrap: string;
   readonly dieLifeTime: number;
+  readonly logBilletRestScrap: string;
 }
 
 /**
