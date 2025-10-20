@@ -319,7 +319,7 @@ export class EisClient {
 			return {
 				data: null,
 				success: false,
-				error: "inputData is required",
+				error: "Input data is required for simulation",
 			} as const;
 		}
 
