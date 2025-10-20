@@ -436,11 +436,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Changelog
 
+### v1.0.8
+
+- **Integrated quenching into simulation**: Quenching calculations are now integrated directly into the `calculateSimulation()` method. When optional quenching parameters (`alloyCoolingRatio`, `waterCapacityQuenching`, `airQuenchingCapacity`, `airLeadOutRunOutTableCapacity`, `quenchingLength`) are provided, the simulation output includes quenching results.
+- **Expanded temper options**: Added support for additional temper designations including 'T66', 'T65', 'T64', and 'T54'.
+
 ### v1.0.7
 
-- **Integrated quenching into simulation**: Quenching calculations are now integrated directly into the `calculateSimulation()` method. When optional quenching parameters (`alloyCoolingRatio`, `waterCapacityQuenching`, `airQuenchingCapacity`, `airLeadOutRunOutTableCapacity`, `quenchingLength`) are provided, the simulation output includes comprehensive quenching results.
-- **Expanded temper options**: Added support for additional temper designations including 'T66', 'T65', 'T64', and 'T54'.
-- **Integrated billet scrap calculations**: Enhanced scrap calculation functionality within the simulation.
+- Integrated billet scrap.
 
 ### v1.0.6
 
