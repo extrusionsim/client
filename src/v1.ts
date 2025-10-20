@@ -5,22 +5,20 @@
  * for the v1 API interface.
  */
 
-import { EisClient, EisApiError } from './client.js';
+import { EisApiError, EisClient } from "./client.js";
 import type {
-  EisClientConfig,
-  SimulationInput,
-  SimulationOutput,
-  QuenchingInput,
-  QuenchingOutput,
-  AgingTableOutput,
-  RecipeSurface,
-  RecipeTemper,
-  PressBilletType,
-  PressTechnology,
-  DrawingDieType,
-  DrawingDieComplexity,
-  AlloyType,
-} from './types/index.js';
+	AgingTableOutput,
+	AlloyType,
+	DrawingDieComplexity,
+	DrawingDieType,
+	EisClientConfig,
+	PressBilletType,
+	PressTechnology,
+	RecipeSurface,
+	RecipeTemper,
+	SimulationInput,
+	SimulationOutput,
+} from "./types/index.js";
 
 // Internal utilities no longer exported
 
@@ -43,10 +41,10 @@ import type {
  * ```
  */
 export class Eis extends EisClient {
-  /**
-   * API version identifier
-   */
-  public static readonly VERSION = '1.0.0';
+	/**
+	 * API version identifier
+	 */
+	public static readonly VERSION = "1.0.0";
 }
 
 /**
@@ -58,19 +56,17 @@ export { EisApiError as EisError };
  * Type exports for v1 API
  */
 export type {
-  EisClientConfig,
-  SimulationInput,
-  SimulationOutput,
-  QuenchingInput,
-  QuenchingOutput,
-  AgingTableOutput,
-  RecipeSurface,
-  RecipeTemper,
-  PressBilletType,
-  PressTechnology,
-  DrawingDieType,
-  DrawingDieComplexity,
-  AlloyType,
+	EisClientConfig,
+	SimulationInput,
+	SimulationOutput,
+	AgingTableOutput,
+	RecipeSurface,
+	RecipeTemper,
+	PressBilletType,
+	PressTechnology,
+	DrawingDieType,
+	DrawingDieComplexity,
+	AlloyType,
 };
 
 /**
@@ -80,13 +76,13 @@ export type {
  * @returns New EIS client instance
  */
 export function createClient(config: EisClientConfig): Eis {
-  return new Eis(config);
+	return new Eis(config);
 }
 
 /**
  * Default export for CommonJS compatibility
  */
 export default {
-  EisError: EisApiError,
-  createClient,
+	EisError: EisApiError,
+	createClient,
 };

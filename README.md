@@ -40,9 +40,10 @@ if (statusResponse.success) {
   console.error('API Error:', statusResponse.error);
 }
 
-// Run simulation
+// Run simulation (optionally include quenching parameters)
 const simulationResponse = await eisApi.calculateSimulation({
   // ... simulation parameters
+  // Optional: add quenching parameters for integrated quenching calculations
 });
 
 if (simulationResponse.success) {
@@ -51,19 +52,9 @@ if (simulationResponse.success) {
     simulationResponse.data.productivityPerHour,
     'kg/h'
   );
+  // Quenching results are included if quenching parameters were provided
 } else {
   console.error('Simulation failed:', simulationResponse.error);
-}
-
-// Calculate quenching
-const quenchingResponse = await eisApi.calculateQuenching({
-  // ... quenching parameters
-});
-
-if (quenchingResponse.success) {
-  console.log('Quenching calculation:', quenchingResponse.data.systemCapable);
-} else {
-  console.error('Quenching failed:', quenchingResponse.error);
 }
 
 // Get aging table
@@ -138,18 +129,19 @@ try {
 
 #### `calculateSimulation(input): Promise<SimulationOutput>`
 
-Calculates aluminum extrusion simulation based on input parameters.
+Calculates aluminum extrusion simulation based on input parameters. When optional quenching parameters are included in the input, the simulation output will also include quenching-related calculations.
 
 **Parameters:**
 
-- `input`: `SimulationInput` - Simulation parameters
+- `input`: `SimulationInput` - Simulation parameters (including optional quenching parameters)
 
-**Returns:** `Promise<SimulationOutput>`
+**Returns:** `Promise<SimulationOutput>` - Simulation results (including optional quenching results when quenching parameters are provided)
 
 The `SimulationInput` interface contains all the parameters needed for simulation:
 
 ```typescript
 interface SimulationInput {
+  // Recipe parameters
   recipeOrderVolume: number;
   recipeFinalProductLength: number;
   recipeStretcherScrap: number;
@@ -162,10 +154,68 @@ interface SimulationInput {
   recipeTemper: 'T4' | 'T5' | 'T6' | 'T66' | 'T65' | 'T64' | 'T54';
   recipeRealWeightPerMeter: number;
   recipeLogLength: number;
+
+  // Press parameters
   pressContainerDiameter: number;
   pressBilletDiameter: number;
   pressMaxShearableLength: number;
   pressRunOutTableLength: number;
+  pressBilletType: 'CUT' | 'SHEARED';
+  pressTechnology: 'DIRECT' | 'INDIRECT';
+
+  // Drawing parameters
+  drawingDieType: 'FLAT' | 'PORTHOLE';
+  drawingDieComplexity: 'A' | 'B' | 'C' | 'D' | 'E';
+
+  // Alloy parameters
+  alloyType:
+    | 'ALMGSI'
+    | 'ALZNMG'
+    | 'ALZNMGCU'
+    | 'ALCUMG'
+    | 'ALMG'
+    | 'ALMN'
+    | 'CPAL';
+
+  // Optional quenching parameters
+  alloyCoolingRatio?: number;
+  waterCapacityQuenching?: number;
+  airQuenchingCapacity?: number;
+  airLeadOutRunOutTableCapacity?: number;
+  quenchingLength?: number;
+
+  // ... see full type definitions in docs
+}
+```
+
+The `SimulationOutput` interface contains comprehensive simulation results:
+
+```typescript
+interface SimulationOutput {
+  // Basic output
+  productivityPerHour: number;
+  efficiencyRatio: string;
+  timeToFinishOrder: number;
+
+  // Billet information
+  firstBilletLength: number;
+  normalBilletLength: number;
+  lastBilletLength: number;
+  billetsPerOrder: number;
+
+  // Temperature data
+  firstBilletTemperature: number;
+  exitTemperaturePressMouth: number;
+  containerTemperature: number;
+
+  // Optional quenching output (when quenching parameters are provided)
+  quenchingSystemCapable?: number;
+  waterFlowSetting?: number;
+  airFlowSetting?: number;
+  temperatureProfileAfterQuenching?: number;
+  coolingTime?: number;
+  afterQuenchingCoolingRate?: number;
+
   // ... see full type definitions in docs
 }
 ```
@@ -180,47 +230,29 @@ const simulationResult = await eisApi.calculateSimulation({
   recipeRampUpTime: 30,
   recipeSurface: 'MILL_FINISH',
   recipeTemper: 'T6',
+  alloyType: 'ALMGSI',
+  pressBilletType: 'CUT',
+  pressTechnology: 'DIRECT',
+  drawingDieType: 'FLAT',
+  drawingDieComplexity: 'B',
+
+  // Optional: Include quenching parameters for quenching calculations
+  alloyCoolingRatio: 0.5,
+  waterCapacityQuenching: 100,
+  airQuenchingCapacity: 50,
+  airLeadOutRunOutTableCapacity: 30,
+  quenchingLength: 5000,
   // ... other parameters
 });
 
 console.log('Productivity:', simulationResult.productivityPerHour, 'kg/h');
 console.log('Efficiency:', simulationResult.efficiencyRatio + '%');
-```
 
-#### `calculateQuenching(input): Promise<QuenchingOutput>`
-
-Calculates quenching parameters for aluminum extrusion based on input parameters.
-
-**Parameters:**
-
-- `input`: `QuenchingInput` - Quenching calculation parameters
-
-**Returns:** `Promise<QuenchingOutput>`
-
-The `QuenchingInput` interface contains all the parameters needed for quenching calculation:
-
-```typescript
-interface QuenchingInput {
-  // ... see full type definitions in docs
+// Access quenching results if quenching parameters were provided
+if (simulationResult.quenchingSystemCapable !== undefined) {
+  console.log('Quenching capable:', simulationResult.quenchingSystemCapable);
+  console.log('Cooling time:', simulationResult.coolingTime, 's');
 }
-```
-
-The `QuenchingOutput` interface contains the calculated quenching results:
-
-```typescript
-interface QuenchingOutput {
-  // ... see full type definitions in docs
-}
-```
-
-**Example:**
-
-```typescript
-const quenchingResult = await eisApi.calculateQuenching({
-  // ... parameters
-});
-
-console.log('System Capable:', quenchingResult.systemCapable);
 ```
 
 #### `getAgingTable(): Promise<AgingTableOutput>`
@@ -308,16 +340,8 @@ try {
 const productionClient = new v1.Eis({
   customerName: 'your-customer',
   apiSecret: 'your-production-secret',
-  baseUrl: 'https://api.eis.com',
+  baseUrl: 'https://api.extrusionsim.com',
   timeout: 30000,
-});
-
-// Staging configuration
-const stagingClient = new v1.Eis({
-  customerName: 'your-customer',
-  apiSecret: 'your-staging-secret',
-  baseUrl: 'https://staging.extrusionsim.com',
-  timeout: 60000, // Longer timeout for staging
 });
 ```
 
@@ -414,19 +438,20 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### v1.0.7
 
-- Integrated billet scrap.
+- **Integrated quenching into simulation**: Quenching calculations are now integrated directly into the `calculateSimulation()` method. When optional quenching parameters (`alloyCoolingRatio`, `waterCapacityQuenching`, `airQuenchingCapacity`, `airLeadOutRunOutTableCapacity`, `quenchingLength`) are provided, the simulation output includes comprehensive quenching results.
+- **Expanded temper options**: Added support for additional temper designations including 'T66', 'T65', 'T64', and 'T54'.
+- **Integrated billet scrap calculations**: Enhanced scrap calculation functionality within the simulation.
 
 ### v1.0.6
 
-- Updated readme file.
+- Updated readme file with comprehensive documentation.
 
 ### v1.0.5
 
-- Fixed aging chart typescript issue.
+- Fixed aging chart TypeScript type issues.
 
 ### v1.0.4
 
-- **Quenching calculation integrated**: Added `calculateQuenching()` method for calculating quenching parameters including water flow, air flow, cooling rates, and system capabilities.
 - **Aging table integrated**: Added `getAgingTable()` method for retrieving comprehensive alloy specifications and heat treatment parameters.
 
 ### v1.0.3

@@ -27,8 +27,8 @@
  * @packageDocumentation
  */
 
-import { EisClient, EisApiError } from './client.js';
-import * as v1Module from './v1.js';
+import { EisApiError, EisClient } from "./client.js";
+import * as v1Module from "./v1.js";
 
 /**
  * EIS API Client
@@ -51,17 +51,15 @@ export { EisApiError as EisError };
  * Type exports - Essential types for using the API
  */
 export type {
-  EisClientConfig,
-  SimulationInput,
-  SimulationOutput,
-  QuenchingInput,
-  QuenchingOutput,
-  AgingTableOutput,
-  RecipeSurface,
-  RecipeTemper,
-  PressBilletType,
-  PressTechnology,
-  DrawingDieType,
-  DrawingDieComplexity,
-  AlloyType,
-} from './types/index.js';
+	AgingTableOutput,
+	AlloyType,
+	DrawingDieComplexity,
+	DrawingDieType,
+	EisClientConfig,
+	PressBilletType,
+	PressTechnology,
+	RecipeSurface,
+	RecipeTemper,
+	SimulationInput,
+	SimulationOutput,
+} from "./types/index.js";
