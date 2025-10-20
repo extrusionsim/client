@@ -158,7 +158,6 @@ export interface SimulationOutput {
 	readonly weightPerMeter: number;
 	readonly dieCavities: number;
 	readonly contactTimeForNormalBillet: number;
-	readonly alloyCoolingRatio: string;
 	readonly customerLengthMm: number;
 	readonly drawingThicknessMin: string;
 	readonly theoreticalWeightPerMeter: number;
