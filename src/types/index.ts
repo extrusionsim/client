@@ -68,154 +68,127 @@ export type AlloyType =
 /**
  * Input parameters for simulation calculation
  */
-export type SimulationInput = {
-	recipeOrderVolume: number;
-	recipeFinalProductLength: number;
-	recipeStretcherScrap: number;
-	recipeRampUpTime: number;
-	recipeSurface:
-		| "BRIGHT_ANODIZED"
-		| "ANODIZED"
-		| "POWDER_COATED"
-		| "MILL_FINISH";
-	recipeTemper: "T4" | "T5" | "T6" | "T66" | "T65" | "T64" | "T54";
-	recipeRealWeightPerMeter: number;
-	recipeLogLength: number;
+export interface SimulationInput {
+	readonly recipeOrderVolume: number;
+	readonly recipeFinalProductLength: number;
+	readonly recipeStretcherScrap: number;
+	readonly recipeRampUpTime: number;
+	readonly recipeSurface: RecipeSurface;
+	readonly recipeTemper: RecipeTemper;
+	readonly recipeRealWeightPerMeter: number;
+	readonly recipeLogLength: number;
 	// recipeNrBilletsToStretch: number;
-	pressContainerDiameter: number;
-	pressBilletDiameter: number;
-	pressMaxShearableLength: number;
-	pressRunOutTableLength: number;
-	pressPullerPosition: number;
-	pressMinShearableLength: number;
-	pressBilletType: "CUT" | "SHEARED";
-	pressTechnology: "DIRECT" | "INDIRECT";
-	pressForce: number;
-	pressMaxRamSpeed: number;
-	pressMaxPullerSpeed: number;
-	pressDeadCycleTime: number;
-	pressDieChangeTime: number;
-	pressBoreDiameter: number;
-	pressRodDiameter: number;
-	drawingArea: number;
-	drawingCircumference: number;
-	drawingThicknessMin: number;
-	drawingInsidePerimeter: number;
-	drawingOutsidePerimeter: number;
-	drawingMandrels: number;
-	drawingDieType: "FLAT" | "PORTHOLE";
-	drawingDieComplexity: "A" | "B" | "C" | "D" | "E";
-	dieCavities: number;
-	alloyType:
-		| "ALMGSI"
-		| "ALZNMG"
-		| "ALZNMGCU"
-		| "ALCUMG"
-		| "ALMG"
-		| "ALMN"
-		| "CPAL";
-	alloyTensileStrength: number;
-	alloyYieldStrength: number;
-	pressCostTotalPerHour: number;
-	dieAlVolume: number;
-	pressNitridingFactor: number;
-	pressId: string;
-	recipeId: string;
+	readonly pressContainerDiameter: number;
+	readonly pressBilletDiameter: number;
+	readonly pressMaxShearableLength: number;
+	readonly pressRunOutTableLength: number;
+	readonly pressPullerPosition: number;
+	readonly pressMinShearableLength: number;
+	readonly pressBilletType: PressBilletType;
+	readonly pressTechnology: PressTechnology;
+	readonly pressForce: number;
+	readonly pressMaxRamSpeed: number;
+	readonly pressMaxPullerSpeed: number;
+	readonly pressDeadCycleTime: number;
+	readonly pressDieChangeTime: number;
+	readonly pressBoreDiameter: number;
+	readonly pressRodDiameter: number;
+	readonly drawingArea: number;
+	readonly drawingCircumference: number;
+	readonly drawingThicknessMin: number;
+	readonly drawingInsidePerimeter: number;
+	readonly drawingOutsidePerimeter: number;
+	readonly drawingMandrels: number;
+	readonly drawingDieType: DrawingDieType;
+	readonly drawingDieComplexity: DrawingDieComplexity;
+	readonly dieCavities: number;
+	readonly alloyType: AlloyType;
+	readonly alloyTensileStrength: number;
+	readonly alloyYieldStrength: number;
+	readonly alloyCoolingRatio: number;
+	readonly pressCostTotalPerHour: number;
+	readonly dieAlVolume: number;
+	readonly pressNitridingFactor: number;
+	readonly pressId: string;
+	readonly recipeId: string;
 
 	// Quenching parameters (optional)
-	alloyCoolingRatio?: QuenchingInput["alloyCoolingRatio"];
-	waterCapacityQuenching?: QuenchingInput["waterCapacityQuenching"];
-	airQuenchingCapacity?: QuenchingInput["airQuenchingCapacity"];
-	airLeadOutRunOutTableCapacity?: QuenchingInput["airLeadOutRunOutTableCapacity"];
-	quenchingLength?: QuenchingInput["quenchingLength"];
-};
+	readonly waterCapacityQuenching?: number;
+	readonly airQuenchingCapacity?: number;
+	readonly airLeadOutRunOutTableCapacity?: number;
+	readonly quenchingLength?: number;
+}
 
 /**
  * Result of simulation calculation
  */
-export type SimulationOutput = {
-	firstBilletLength: number;
-	normalBilletLength: number;
-	lastBilletLength: number;
-	billetsPerOrder: number;
-	extrusionLength: string;
-	lengthsPerBillet: number;
-	startUpRamSpeed: string;
-	normalRamSpeed: string;
-	normalProductSpeed: string;
-	billetsPerHour: string;
-	productivityPerHour: number;
-	netProductivityPerHour: number;
-	scrap: string;
-	timeToFinishOrder: number;
-	secondsByBillet: number;
-	firstBilletTemperature: number;
-	secondBilletTemperature: number;
-	normalBilletTemperature: number;
-	containerTemperature: number;
-	dieTemperatureAtThePress: number;
-	exitTemperaturePressMouth: number;
-	contactTime: number;
-	extrusionRatio: number;
-	inefficient: boolean;
-	efficiencyRatio: string;
-	totalOrderQuantity: string;
-	pressCostPerKg: string;
-	quantityStretching: number;
+export interface SimulationOutput {
+	readonly firstBilletLength: number;
+	readonly normalBilletLength: number;
+	readonly lastBilletLength: number;
+	readonly billetsPerOrder: number;
+	readonly extrusionLength: string;
+	readonly lengthsPerBillet: number;
+	readonly startUpRamSpeed: string;
+	readonly normalRamSpeed: string;
+	readonly normalProductSpeed: string;
+	readonly billetsPerHour: string;
+	readonly productivityPerHour: number;
+	readonly netProductivityPerHour: number;
+	readonly scrap: string;
+	readonly timeToFinishOrder: number;
+	readonly secondsByBillet: number;
+	readonly firstBilletTemperature: number;
+	readonly secondBilletTemperature: number;
+	readonly normalBilletTemperature: number;
+	readonly containerTemperature: number;
+	readonly dieTemperatureAtThePress: number;
+	readonly exitTemperaturePressMouth: number;
+	readonly contactTime: number;
+	readonly extrusionRatio: number;
+	readonly inefficient: boolean;
+	readonly efficiencyRatio: string;
+	readonly totalOrderQuantity: string;
+	readonly pressCostPerKg: string;
+	readonly quantityStretching: number;
 	// forceToStretchProfileTm: number;
-	stretchingPressureNeeded: number;
-	extrusionLengthAfterStretching: string;
-	nrBilletsToStretch: number;
-	weightPerMeter: number;
-	dieCavities: number;
-	contactTimeForNormalBillet: number;
-	customerLengthMm: number;
-	drawingThicknessMin: string;
-	theoreticalWeightPerMeter: number;
-	scrapAfterWeldingBillets: string;
-	totalCoringAndWeldingScrap: string;
-	logBilletRestScrap: string;
+	readonly stretchingPressureNeeded: number;
+	readonly extrusionLengthAfterStretching: string;
+	readonly nrBilletsToStretch: number;
+	readonly weightPerMeter: number;
+	readonly dieCavities: number;
+	readonly contactTimeForNormalBillet: number;
+	readonly alloyCoolingRatio: string;
+	readonly customerLengthMm: number;
+	readonly drawingThicknessMin: string;
+	readonly theoreticalWeightPerMeter: number;
+	readonly scrapAfterWeldingBillets: string;
+	readonly totalCoringAndWeldingScrap: string;
+	readonly dieLifeTime: number;
+	readonly logBilletRestScrap: string;
 
 	// Quenching output (optional)
-	quenchingSystemCapable: number;
-	waterFlowSetting: number;
-	airFlowSetting: number;
-	waterFlowAvailable: number;
-	pullerThroughQuenching: number;
-	temperatureProfileAfterQuenching: number;
-	coolingTime: number;
-	heatAluminumGoesOut: number;
-	qAlM: number;
-	qAlSc: number;
-	afterQuenchingCoolingRate: number;
-	tfalQuenching: number;
-	airWaterFlowRatio: number;
-	waterMass: number;
-	waterFlow: number;
-	airFlowEquivalent: number;
-	waterFlowSettingWaterFlowRatio: number;
-	airFlowSettingAirFlowRatio: number;
-	waterRequired: number;
-	airRequired: number;
-	sumAirWaterRatio: number;
-};
-/**
- * Input parameters for quenching calculation
- */
-type QuenchingInput = {
-  readonly waterCapacityQuenching: number;
-  readonly airQuenchingCapacity: number;
-  readonly airLeadOutRunOutTableCapacity: number;
-  readonly quenchingLength: number;
-  readonly drawingThicknessMin: number;
-  readonly customerLengthMm: number;
-  readonly normalProductSpeed: number;
-  readonly exitTemperaturePressMouth: number;
-  readonly weightPerMeter: number;
-  readonly dieCavities: number;
-  readonly alloyCoolingRatio: number;
-  readonly contactTimeForNormalBillet: number;
-  readonly extrusionRatio: number;
+	readonly quenchingSystemCapable: number;
+	readonly waterFlowSetting: number;
+	readonly airFlowSetting: number;
+	readonly waterFlowAvailable: number;
+	readonly pullerThroughQuenching: number;
+	readonly temperatureProfileAfterQuenching: number;
+	readonly coolingTime: number;
+	readonly heatAluminumGoesOut: number;
+	readonly qAlM: number;
+	readonly qAlSc: number;
+	readonly afterQuenchingCoolingRate: number;
+	readonly tfalQuenching: number;
+	readonly airWaterFlowRatio: number;
+	readonly waterMass: number;
+	readonly waterFlow: number;
+	readonly airFlowEquivalent: number;
+	readonly waterFlowSettingWaterFlowRatio: number;
+	readonly airFlowSettingAirFlowRatio: number;
+	readonly waterRequired: number;
+	readonly airRequired: number;
+	readonly sumAirWaterRatio: number;
 }
 
 /**
