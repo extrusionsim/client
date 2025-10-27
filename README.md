@@ -28,6 +28,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Changelog
 
+### v1.0.12
+- Integrated shape factor.
+
 ### v1.0.11
 
 - **Integrated quenching into simulation**: Quenching calculations are now integrated directly into the `calculateSimulation()` method. When optional quenching parameters (`alloyCoolingRatio`, `waterCapacityQuenching`, `airQuenchingCapacity`, `airLeadOutRunOutTableCapacity`, `quenchingLength`) are provided, the simulation output includes quenching results.

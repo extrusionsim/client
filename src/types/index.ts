@@ -188,6 +188,7 @@ export interface SimulationOutput {
 	readonly waterRequired: number;
 	readonly airRequired: number;
 	readonly sumAirWaterRatio: number;
+	readonly shapeFactor: number;
 }
 
 /**
