@@ -226,6 +226,7 @@ export interface ApiStatus {
   readonly message: string;
   readonly timestamp: string;
   readonly version: string;
+	readonly tier: "BASIC" | "FULL";
 }
 
 
