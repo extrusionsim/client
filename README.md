@@ -28,7 +28,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Changelog
 
-### v1.0.17
+### v1.0.18
 - Integrated precut billet length calculation.
 
 ### v1.0.13
