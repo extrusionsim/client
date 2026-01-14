@@ -126,6 +126,7 @@ export interface SimulationOutput {
 	readonly firstBilletLength: number;
 	readonly normalBilletLength: number;
 	readonly lastBilletLength: number;
+	readonly precutBilletLength: number;
 	readonly billetsPerOrder: number;
 	readonly extrusionLength: string;
 	readonly lengthsPerBillet: number;
