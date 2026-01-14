@@ -36,7 +36,7 @@ export type RecipeTemper = 'T4' | 'T5' | 'T6' | 'T66' | 'T65' | 'T64' | 'T54';
 /**
  * Billet type for the extrusion process
  */
-export type PressBilletType = 'CUT' | 'SHEARED';
+export type PressBilletType = 'CUT' | 'SHEARED' | 'PRECUT';
 
 /**
  * Press technology type
