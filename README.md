@@ -28,7 +28,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Changelog
 
-### v1.0.19
+### v1.0.20
 - Integrated die suggestions.
 
 ### v1.0.18

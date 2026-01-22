@@ -170,7 +170,7 @@ export interface SimulationOutput {
 
 	readonly numberOfCavitiesSuggested: number;
 	readonly dieDiameterMinSuggested: number;
-	readonly dieDiameterMaxSuggested: number;
+	readonly dieLengthSuggested: number;
 
 	// Quenching output (optional)
 	readonly quenchingSystemCapable: number;
