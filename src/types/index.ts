@@ -93,6 +93,8 @@ export interface SimulationInput {
 	readonly pressDieChangeTime: number;
 	readonly pressBoreDiameter: number;
 	readonly pressRodDiameter: number;
+	readonly pressNitridingFactor: number;
+	readonly pressMaxDieDimensionDiameter: number;
 	readonly drawingArea: number;
 	readonly drawingCircumference: number;
 	readonly drawingThicknessMin: number;
@@ -108,7 +110,6 @@ export interface SimulationInput {
 	readonly alloyCoolingRatio: number;
 	readonly pressCostTotalPerHour: number;
 	readonly dieAlVolume: number;
-	readonly pressNitridingFactor: number;
 	readonly pressId: string;
 	readonly recipeId: string;
 
@@ -166,6 +167,10 @@ export interface SimulationOutput {
 	readonly totalCoringAndWeldingScrap: string;
 	readonly dieLifeTime: number;
 	readonly logBilletRestScrap: string;
+
+	readonly numberOfCavitiesSuggested: number;
+	readonly dieDiameterMinSuggested: number;
+	readonly dieDiameterMaxSuggested: number;
 
 	// Quenching output (optional)
 	readonly quenchingSystemCapable: number;
