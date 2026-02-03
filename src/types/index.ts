@@ -168,7 +168,8 @@ export interface SimulationOutput {
 	readonly dieLifeTime: number;
 	readonly logBilletRestScrap: string;
 
-	readonly numberOfCavitiesSuggested: number;
+	readonly numberOfCavitiesPossible: number;
+	readonly numberOfCavitiesRecommended: number;
 	readonly dieDiameterMinSuggested: number;
 	readonly dieLengthSuggested: number;
 
