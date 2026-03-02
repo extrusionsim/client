@@ -26,7 +26,8 @@ export type RecipeSurface =
   | 'BRIGHT_ANODIZED'
   | 'ANODIZED'
   | 'POWDER_COATED'
-  | 'MILL_FINISH';
+  | 'MILL_FINISH'
+  | 'POWDER_COATED_MXT';
 
 /**
  * Temper designation for aluminum alloy

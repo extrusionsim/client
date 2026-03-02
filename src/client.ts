@@ -212,7 +212,7 @@ export class EisClient {
 	 *     - `recipeFinalProductLength: number` - Final product length
 	 *     - `recipeStretcherScrap: number` - Stretcher scrap amount
 	 *     - `recipeRampUpTime: number` - Ramp up time for the recipe
-	 *     - `recipeSurface: 'BRIGHT_ANODIZED' | 'ANODIZED' | 'POWDER_COATED' | 'MILL_FINISH'` - Surface finish type
+	 *     - `recipeSurface: 'BRIGHT_ANODIZED' | 'ANODIZED' | 'POWDER_COATED' | 'MILL_FINISH' | 'POWDER_COATED_MXT'` - Surface finish type
 	 *     - `recipeTemper: 'T4' | 'T5' | 'T6' | 'T66' | 'T65' | 'T64' | 'T54'` - Temper classification
 	 *     - `recipeRealWeightPerMeter: number` - Real weight per meter
 	 *     - `recipeLogLength: number` - Log length
