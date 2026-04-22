@@ -98,7 +98,7 @@ export interface SimulationInput {
 	readonly pressMaxDieDimensionDiameter: number;
 	readonly drawingArea: number;
 	readonly drawingCircumference: number;
-	readonly drawingThicknessMin: number;
+/* 	readonly drawingThicknessMin: number; */
 	readonly drawingInsidePerimeter: number;
 	readonly drawingOutsidePerimeter: number;
 	readonly drawingMandrels: number;
@@ -162,7 +162,8 @@ export interface SimulationOutput {
 	readonly dieCavities: number;
 	readonly contactTimeForNormalBillet: number;
 	readonly customerLengthMm: number;
-	readonly drawingThicknessMin: string;
+/* 	readonly drawingThicknessMin: string; */ 
+	readonly drawingThicknessAvg: string; 
 	readonly theoreticalWeightPerMeter: number;
 	readonly scrapAfterWeldingBillets: string;
 	readonly totalCoringAndWeldingScrap: string;

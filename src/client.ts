@@ -233,7 +233,6 @@ export class EisClient {
 	 *     - `pressRodDiameter: number` - Press rod diameter
 	 *     - `drawingArea: number` - Drawing area
 	 *     - `drawingCircumference: number` - Drawing circumference
-	 *     - `drawingThicknessMin: number` - Minimum drawing thickness
 	 *     - `drawingInsidePerimeter: number` - Inside perimeter
 	 *     - `drawingOutsidePerimeter: number` - Outside perimeter
 	 *     - `drawingMandrels: number` - Number of drawing mandrels
@@ -295,7 +294,7 @@ export class EisClient {
 	 *     - `contactTimeForNormalBillet: number` - Contact time for normal billet
 	 *     - `alloyCoolingRatio: string` - Alloy cooling ratio
 	 *     - `customerLengthMm: number` - Customer length in millimeters
-	 *     - `drawingThicknessMin: string` - Minimum drawing thickness
+	 *     - `drawingThicknessAvg: string` - Average drawing thickness
 	 *     - `theoreticalWeightPerMeter: number` - Theoretical weight per meter
 	 *     - `scrapAfterWeldingBillets: string` - Scrap after welding billets
 	 *     - `totalCoringAndWeldingScrap: string` - Total coring and welding scrap

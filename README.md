@@ -28,6 +28,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Changelog
 
+### v1.0.23
+- Drawing thickness logic have changed. 
+
 ### v1.0.22
 - Powder Coated Max. Exit Temperature variaton added to surfaces.
 
