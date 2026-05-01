@@ -237,7 +237,7 @@ export class EisClient {
 	 *     - `drawingOutsidePerimeter: number` - Outside perimeter
 	 *     - `drawingMandrels: number` - Number of drawing mandrels
 	 *     - `drawingDieType: 'FLAT' | 'PORTHOLE'` - Die type
-	 *     - `drawingDieComplexity: 'A' | 'B' | 'C' | 'D' | 'E'` - Die complexity
+	 *     - `drawingDieComplexity: 'AUTO' | 'A' | 'B' | 'C' | 'D' | 'E'` - Die complexity
 	 *     - `dieCavities: number` - Number of die cavities
 	 *     - `alloyType: 'ALMGSI' | 'ALZNMG' | 'ALZNMGCU' | 'ALCUMG' | 'ALMG' | 'ALMN' | 'CPAL'` - Alloy type
 	 *     - `alloyTensileStrength: number` - Alloy tensile strength

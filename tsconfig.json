@@ -1,9 +1,12 @@
 {
 	"compilerOptions": {
 		"target": "ES2018",
-		"lib": ["ES2018", "DOM"],
-		"module": "CommonJS",
-		"moduleResolution": "node",
+		"lib": [
+			"ES2018",
+			"DOM"
+		],
+		"module": "Node16",
+		"moduleResolution": "node16",
 		"outDir": "./dist",
 		"rootDir": "./src",
 		"strict": true,
@@ -23,6 +26,12 @@
 		"noPropertyAccessFromIndexSignature": true,
 		"noUncheckedIndexedAccess": true
 	},
-	"include": ["src/**/*"],
-	"exclude": ["node_modules", "dist", "test"]
+	"include": [
+		"src/**/*"
+	],
+	"exclude": [
+		"node_modules",
+		"dist",
+		"test"
+	]
 }
