@@ -198,6 +198,16 @@ export interface SimulationOutput {
   readonly airRequired: number;
   readonly sumAirWaterRatio: number;
   readonly shapeStability: number;
+
+  // Nitriding output
+  readonly nitridingTimeHigh: number;
+  readonly nitridingInterval1New: number;
+  readonly nitridingInterval1Used: number;
+  readonly nitridingInterval2: number;
+  readonly nitridingInterval3: number;
+  readonly nitridingInterval4: number;
+  readonly nitridingInterval5: number;
+  readonly nitridingInterval6: number;
 }
 
 /**

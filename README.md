@@ -28,6 +28,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Changelog
 
+### v1.0.25
+- Nitriding interval calculations integrated.
+
 ### v1.0.24
 - AUTO die compexlity has been added.
 
