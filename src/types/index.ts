@@ -112,8 +112,6 @@ export interface SimulationInput {
   readonly alloyCoolingRatio: number;
   readonly pressCostTotalPerHour: number;
   readonly dieAlVolume: number;
-  readonly pressId: string;
-  readonly recipeId: string;
 
   // Quenching parameters (optional)
   readonly waterCapacityQuenching?: number;

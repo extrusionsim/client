@@ -246,8 +246,6 @@ export class EisClient {
 	 *     - `pressCostTotalPerHour: number` - Total press cost per hour
 	 *     - `dieAlVolume: number` - Die aluminum volume
 	 *     - `pressNitridingFactor: number` - Press nitriding factor
-	 *     - `pressId: string` - Press identifier
-	 *     - `recipeId: string` - Recipe identifier
 	 *
 	 * Optional quenching parameters (include these to get quenching calculations in output):
 	 *     - `alloyCoolingRatio?: number` - Alloy cooling ratio for quenching
