@@ -74,12 +74,12 @@ export interface SimulationInput {
   readonly recipeOrderVolume: number;
   readonly recipeFinalProductLength: number;
   readonly recipeStretcherScrap: number;
+  readonly recipeAdditionalScrap: number;
   readonly recipeRampUpTime: number;
   readonly recipeSurface: RecipeSurface;
   readonly recipeTemper: RecipeTemper;
   readonly recipeRealWeightPerMeter: number;
   readonly recipeLogLength: number;
-  // recipeNrBilletsToStretch: number;
   readonly pressContainerDiameter: number;
   readonly pressBilletDiameter: number;
   readonly pressMaxShearableLength: number;
@@ -169,10 +169,7 @@ export interface SimulationOutput {
   readonly dieLifeTime: number;
   readonly logBilletRestScrap: string;
 
-  readonly numberOfCavitiesPossible: number;
   readonly numberOfCavitiesRecommended: number;
-  readonly dieDiameterMinSuggested: number;
-  readonly dieLengthSuggested: number;
 
   // Quenching output (optional)
   readonly quenchingSystemCapable: number;
