@@ -28,8 +28,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Changelog
 
+### v1.0.28
+- Added `recipeAdditionalScrap` to simulation input.
+
 ### v1.0.27
-- Removed pressId and recipeId from simulation input.
+- Removed `pressId` and `recipeId` from simulation input.
 
 ### v1.0.26
 - Natural Industrial surface finish integrated.
