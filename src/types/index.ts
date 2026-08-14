@@ -96,7 +96,6 @@ export interface SimulationInput {
   readonly pressBoreDiameter: number;
   readonly pressRodDiameter: number;
   readonly pressNitridingFactor: number;
-  readonly pressMaxDieDimensionDiameter: number;
   readonly drawingArea: number;
   readonly drawingCircumference: number;
   /* 	readonly drawingThicknessMin: number; */
