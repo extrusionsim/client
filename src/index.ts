@@ -52,6 +52,8 @@ export { EisApiError as EisError };
  */
 export type {
 	AgingTableOutput,
+	AlloyDatasheetInput,
+	AlloyDatasheetOutput,
 	AlloyType,
 	DrawingDieComplexity,
 	DrawingDieType,

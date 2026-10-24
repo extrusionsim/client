@@ -7,6 +7,8 @@
 
 import type {
 	AgingTableOutput,
+	AlloyDatasheetInput,
+	AlloyDatasheetOutput,
 	ApiError,
 	ApiResponse,
 	ApiStatus,
@@ -353,6 +355,44 @@ export class EisClient {
 			const data = await this.makeRequest<AgingTableOutput>("/aging-table", {
 				method: "GET",
 			});
+
+			return {
+				data,
+				success: true,
+				error: null,
+			} as const;
+		} catch (error) {
+			return {
+				data: null,
+				success: false,
+				error: error instanceof Error ? error.message : "Unknown error",
+			} as const;
+		}
+	}
+
+	/**
+	 * Get the alloy datasheet for a chemical composition: the alloy family and
+	 * subfamily it belongs to, the subfamily's mechanical properties (T4/T6) and
+	 * its extrusion process window. Full tier only.
+	 *
+	 * @param inputData - AlloyDatasheetInput: `{ min, max }` weight percent for each of
+	 *     Si, Fe, Cu, Mn, Mg, Cr, Zn, Ti
+	 *
+	 * @returns Promise<ApiResponse<AlloyDatasheetOutput>> - API response with either:
+	 *   - Success: `{ data: AlloyDatasheetOutput, success: true, error: null }`
+	 *   - Error: `{ data: null, success: false, error: string }` - Contains error message
+	 */
+	public async getAlloyDatasheet(
+		inputData: AlloyDatasheetInput,
+	): Promise<ApiResponse<AlloyDatasheetOutput>> {
+		try {
+			const data = await this.makeRequest<AlloyDatasheetOutput>(
+				"/alloy-datasheet",
+				{
+					method: "POST",
+					body: JSON.stringify(inputData),
+				},
+			);
 
 			return {
 				data,

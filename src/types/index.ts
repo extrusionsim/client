@@ -234,6 +234,75 @@ export interface AgingTableEntry {
 export type AgingTableOutput = AgingTableEntry[];
 
 /**
+ * Input for an alloy datasheet: a min and max weight percent per element (0–100, min <= max)
+ */
+export type AlloyDatasheetInput = Record<
+  'Si' | 'Fe' | 'Cu' | 'Mn' | 'Mg' | 'Cr' | 'Zn' | 'Ti',
+  { readonly min: number; readonly max: number }
+>;
+
+/**
+ * Mechanical properties in one temper. Null means "N/A": the figure does not apply.
+ */
+interface AlloyTemper {
+  /** Tensile strength, MPa */
+  readonly rm: number | null;
+  /** Proof strength at 0.2 %, MPa */
+  readonly rp02: number | null;
+  /** Elongation A, % */
+  readonly elongation: number | null;
+  /** Elongation A50, % */
+  readonly elongation50: number | null;
+  /** Brinell hardness, HB */
+  readonly hb: number | null;
+}
+
+/**
+ * Alloy datasheet: the alloy a composition belongs to, its properties and process window
+ */
+export interface AlloyDatasheetOutput {
+  /** The best-matching alloy family (EN 573-3) */
+  readonly family: {
+    /** Designation, e.g. "6005A" */
+    readonly id: string;
+    /** Alloy series, e.g. "6" */
+    readonly group: string;
+    readonly score: number;
+    readonly maxScore: number;
+    /** Families whose limits contain the whole composition; empty when none does */
+    readonly exactMatches: string[];
+    /** The family's composition limits, `[min, max]` weight percent */
+    readonly limits: Record<
+      keyof AlloyDatasheetInput,
+      readonly [number, number]
+    >;
+    /** Per element: the input band lies inside `limits` */
+    readonly inSpec: Record<keyof AlloyDatasheetInput, boolean>;
+  };
+  /** The best-matching subfamily (EN 755-2) in the family's series; null if the series has none */
+  readonly subfamily: {
+    readonly id: string;
+    readonly score: number;
+    readonly maxScore: number;
+    /** Every subfamily tied on the winning score, including this one */
+    readonly tied: string[];
+    readonly t4: AlloyTemper;
+    readonly t6: AlloyTemper;
+    /** Recommended extrusion process window */
+    readonly process: {
+      /** Billet temperature range, °C */
+      readonly billet: readonly [number, number] | null;
+      /** Profile exit temperature range, °C */
+      readonly exit: readonly [number, number] | null;
+      /** Minimum cooling rate, °C/s, or the quench route (e.g. "Air / TTP") */
+      readonly coolingRate: number | string | null;
+      /** Process note for this alloy */
+      readonly note: string | null;
+    };
+  } | null;
+}
+
+/**
  * API status information
  */
 export interface ApiStatus {

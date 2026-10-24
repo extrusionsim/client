@@ -28,6 +28,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Changelog
 
+### v1.0.30
+- Added `getAlloyDatasheet()`: identifies an alloy from its chemical composition and returns its datasheet.
+
 ### v1.0.29
 - Added `recipeAdditionalScrap` to simulation input.
 - Removed `pressMaxDieDimensionDiameter` from simulation input.

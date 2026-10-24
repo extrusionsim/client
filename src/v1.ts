@@ -8,6 +8,8 @@
 import { EisApiError, EisClient } from "./client.js";
 import type {
 	AgingTableOutput,
+	AlloyDatasheetInput,
+	AlloyDatasheetOutput,
 	AlloyType,
 	DrawingDieComplexity,
 	DrawingDieType,
@@ -60,6 +62,8 @@ export type {
 	SimulationInput,
 	SimulationOutput,
 	AgingTableOutput,
+	AlloyDatasheetInput,
+	AlloyDatasheetOutput,
 	RecipeSurface,
 	RecipeTemper,
 	PressBilletType,
